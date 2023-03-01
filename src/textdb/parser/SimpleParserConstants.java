@@ -17,43 +17,49 @@ public interface SimpleParserConstants {
   /** RegularExpression Id. */
   int WHERE = 10;
   /** RegularExpression Id. */
-  int GROUPBY = 11;
+  int ASC = 11;
   /** RegularExpression Id. */
-  int INNER = 12;
+  int DESC = 12;
   /** RegularExpression Id. */
-  int JOIN = 13;
+  int ORDERBY = 13;
   /** RegularExpression Id. */
-  int OPENPAREN = 14;
+  int GROUPBY = 14;
   /** RegularExpression Id. */
-  int CLOSEPAREN = 15;
+  int INNER = 15;
   /** RegularExpression Id. */
-  int AND = 16;
+  int JOIN = 16;
   /** RegularExpression Id. */
-  int OR = 17;
+  int OPENPAREN = 17;
   /** RegularExpression Id. */
-  int NOT = 18;
+  int CLOSEPAREN = 18;
   /** RegularExpression Id. */
-  int XOR = 19;
+  int AND = 19;
   /** RegularExpression Id. */
-  int ON = 20;
+  int OR = 20;
   /** RegularExpression Id. */
-  int INTEGER_LITERAL = 21;
+  int NOT = 21;
   /** RegularExpression Id. */
-  int FLOATING_POINT_LITERAL = 22;
+  int XOR = 22;
   /** RegularExpression Id. */
-  int EXPONENT = 23;
+  int ON = 23;
   /** RegularExpression Id. */
-  int STRING_LITERAL = 24;
+  int INTEGER_LITERAL = 24;
   /** RegularExpression Id. */
-  int IDENTIFIER = 25;
+  int FLOATING_POINT_LITERAL = 25;
   /** RegularExpression Id. */
-  int BASEID = 26;
+  int EXPONENT = 26;
   /** RegularExpression Id. */
-  int DQSTRING = 27;
+  int STRING_LITERAL = 27;
   /** RegularExpression Id. */
-  int LETTER = 28;
+  int IDENTIFIER = 28;
   /** RegularExpression Id. */
-  int DIGIT = 29;
+  int BASEID = 29;
+  /** RegularExpression Id. */
+  int DQSTRING = 30;
+  /** RegularExpression Id. */
+  int LETTER = 31;
+  /** RegularExpression Id. */
+  int DIGIT = 32;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -71,6 +77,9 @@ public interface SimpleParserConstants {
     "\"select\"",
     "\"from\"",
     "\"where\"",
+    "\"asc\"",
+    "\"desc\"",
+    "<ORDERBY>",
     "<GROUPBY>",
     "\"inner\"",
     "\"join\"",

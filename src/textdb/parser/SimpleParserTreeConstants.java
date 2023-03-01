@@ -10,18 +10,20 @@ public interface SimpleParserTreeConstants
   public int JJTJOINEXPR = 4;
   public int JJTON = 5;
   public int JJTWHERE = 6;
-  public int JJTADD = 7;
-  public int JJTAOP = 8;
-  public int JJTMOP = 9;
-  public int JJTMULT = 10;
-  public int JJTOR = 11;
-  public int JJTAND = 12;
-  public int JJTNOT = 13;
-  public int JJTCOP = 14;
-  public int JJTINTEGER = 15;
-  public int JJTREAL = 16;
-  public int JJTSTRING = 17;
-  public int JJTMYID = 18;
+  public int JJTORDERBY = 7;
+  public int JJTORDEREXPR = 8;
+  public int JJTADD = 9;
+  public int JJTAOP = 10;
+  public int JJTMOP = 11;
+  public int JJTMULT = 12;
+  public int JJTOR = 13;
+  public int JJTAND = 14;
+  public int JJTNOT = 15;
+  public int JJTCOP = 16;
+  public int JJTINTEGER = 17;
+  public int JJTREAL = 18;
+  public int JJTSTRING = 19;
+  public int JJTMYID = 20;
 
 
   public String[] jjtNodeName = {
@@ -32,6 +34,8 @@ public interface SimpleParserTreeConstants
     "JoinExpr",
     "On",
     "Where",
+    "OrderBy",
+    "OrderExpr",
     "Add",
     "Aop",
     "Mop",
@@ -46,4 +50,4 @@ public interface SimpleParserTreeConstants
     "MyID",
   };
 }
-/* JavaCC - OriginalChecksum=fdd0f8fb42852959bd7e1df2a00a5642 (do not edit this line) */
+/* JavaCC - OriginalChecksum=02564cd6df9a33ad4df79cb31feafb15 (do not edit this line) */

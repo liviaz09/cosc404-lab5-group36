@@ -1,6 +1,10 @@
 /**
  * A simple SQL parser.
- */options{  JDK_VERSION = "1.6";  static = false;
+ */
+options
+{
+  JDK_VERSION = "1.6";
+  static = false;
   MULTI=true;
   NODE_DEFAULT_VOID=true;
 }
@@ -54,7 +58,10 @@ TOKEN [IGNORE_CASE] :
   <SELECT: "select">
 | <FROM: "from">
 | <WHERE: "where">
+| <ASC: "asc">
+| <DESC: "desc">
 /* TODO: Add ORDER BY, ASC, DESC tokens here. */
+| <ORDERBY: "order by" | "orderby">
 | <GROUPBY: "group by" | "groupby">
 | <INNER: "inner">
 | <JOIN: "join">
@@ -113,7 +120,7 @@ void SQLQuery() : { }
 
 void Query() : {}
 {
-	Select() [ From() ] [ Where() ]  /* TODO: Add support for ORDER BY here. */
+	Select() [ From() ] [ Where() ] [ OrderBy() ] /* TODO: Add support for ORDER BY here. */
 }
 
 void Select() #Select() : {}
@@ -156,11 +163,18 @@ void Where() #Where(>0) : {}
 /*
 TODO: Add OrderBy support here.
 */
-
+void OrderBy() #OrderBy(>0) :{}
+{
+    <ORDERBY> SQLSelectList() OrderExpr()
+}
 /*
 Expression syntax
 */
-	
+void OrderExpr() #OrderExpr(): {}
+{
+    [LOOKAHEAD(2) <ASC> OrderBy()| <DESC> OrderBy()]
+}
+
 void AdditiveExpression() #Add(>1) : {}
 {
 	MultiplicativeExpression() ( LOOKAHEAD(2) Aop() MultiplicativeExpression() )*  
