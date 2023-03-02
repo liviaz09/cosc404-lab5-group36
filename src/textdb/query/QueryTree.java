@@ -174,9 +174,11 @@ public class QueryTree {
 
         /* TODO: Create query plan. */
         /* TODO: Scan operator */
-       
+        TextFileScan supscan = new TextFileScan(DATA_DIR+"supplier.txt", supplier);
         /* TODO: Selection operator */        
-      
+        //selection operator works on s_suppkey<5
+        SelectionPredicate pred = new ConstantSelectionPredicate(0, 5, new Less());
+        Selection supsel = new Selection(supscan,pred);
 
         /* TODO: Sort operator */
        
