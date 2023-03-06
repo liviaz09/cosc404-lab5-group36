@@ -163,21 +163,18 @@ void Where() #Where(>0) : {}
 /*
 TODO: Add OrderBy support here.
 */
-void OrderBy() #OrderBy(>0) :{}
+void OrderBy() #OrderBy(>0) : {}
 {
-    <ORDERBY> SQLSelectList() OrderExpr()
-}
-/*
-Expression syntax
-*/
-void OrderExpr() #OrderExpr(): {}
-{
-    [LOOKAHEAD(2) <ASC> OrderBy()| <DESC> OrderBy()]
-}
+    <ORDERBY> AdditiveExpression() [ASC() | DESC()] ( ","  AdditiveExpression()[ASC() | DESC()])*
 
-void ASC() #ASC : {}
+}
+void ASC() #ASC : {Token t;}
 {
-    <ASC>
+   t= <ASC> #ASC {jjtThis.value=t.image;}
+}
+void DESC() #DESC : {Token t;}
+{
+   t= <DESC> #DESC {jjtThis.value=t.image;}
 }
 
 void AdditiveExpression() #Add(>1) : {}

@@ -11,8 +11,8 @@ public interface SimpleParserTreeConstants
   public int JJTON = 5;
   public int JJTWHERE = 6;
   public int JJTORDERBY = 7;
-  public int JJTORDEREXPR = 8;
-  public int JJTASC = 9;
+  public int JJTASC = 8;
+  public int JJTDESC = 9;
   public int JJTADD = 10;
   public int JJTAOP = 11;
   public int JJTMOP = 12;
@@ -36,8 +36,8 @@ public interface SimpleParserTreeConstants
     "On",
     "Where",
     "OrderBy",
-    "OrderExpr",
     "ASC",
+    "DESC",
     "Add",
     "Aop",
     "Mop",
@@ -52,4 +52,4 @@ public interface SimpleParserTreeConstants
     "MyID",
   };
 }
-/* JavaCC - OriginalChecksum=b57603e593a956c64c36f77c30a8d40f (do not edit this line) */
+/* JavaCC - OriginalChecksum=b48768d2a487c361f5478114fc145dd2 (do not edit this line) */

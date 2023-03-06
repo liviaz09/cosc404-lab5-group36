@@ -198,9 +198,6 @@ public class QueryTree {
     op = proj;
   
     outputOperator(op);
-
-        Operator op = null;        
-        
         /* TODO: Assign your top query plan operator to op. */
         /* op = todo;  */         
         

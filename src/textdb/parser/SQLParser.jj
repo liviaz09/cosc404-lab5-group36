@@ -328,7 +328,7 @@ void Where()            : {/*@bgen(jjtree) #Where(> 0) */
 /*
 TODO: Add OrderBy support here.
 */
-void OrderBy()              :{/*@bgen(jjtree) #OrderBy(> 0) */
+void OrderBy()              : {/*@bgen(jjtree) #OrderBy(> 0) */
   ASTOrderBy jjtn000 = new ASTOrderBy(JJTORDERBY);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
@@ -336,7 +336,7 @@ void OrderBy()              :{/*@bgen(jjtree) #OrderBy(> 0) */
 {/*@bgen(jjtree) #OrderBy(> 0) */
     try {
 /*@egen*/
-    <ORDERBY> SQLSelectList() OrderExpr()/*@bgen(jjtree)*/
+    <ORDERBY> AdditiveExpression() [ASC() | DESC()] ( ","  AdditiveExpression()[ASC() | DESC()])*/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -357,55 +357,74 @@ void OrderBy()              :{/*@bgen(jjtree) #OrderBy(> 0) */
       }
     }
 /*@egen*/
-}
-/*
-Expression syntax
-*/
-void OrderExpr()             : {/*@bgen(jjtree) #OrderExpr(true) */
-  ASTOrderExpr jjtn000 = new ASTOrderExpr(JJTORDEREXPR);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) #OrderExpr(true) */
-    try {
-/*@egen*/
-    [LOOKAHEAD(2) <ASC> OrderBy()| <DESC> OrderBy()]/*@bgen(jjtree)*/
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        throw (RuntimeException)jjte000;
-      }
-      if (jjte000 instanceof ParseException) {
-        throw (ParseException)jjte000;
-      }
-      throw (Error)jjte000;
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-/*@egen*/
-}
 
+}
 void ASC()      : {/*@bgen(jjtree) ASC */
-  ASTASC jjtn000 = new ASTASC(JJTASC);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+                   ASTASC jjtn000 = new ASTASC(JJTASC);
+                   boolean jjtc000 = true;
+                   jjtree.openNodeScope(jjtn000);
+/*@egen*/Token t;}
 {/*@bgen(jjtree) ASC */
-    try {
+   try {
+/*@egen*//*@bgen(jjtree) ASC */
+   {
+     ASTASC jjtn001 = new ASTASC(JJTASC);
+     boolean jjtc001 = true;
+     jjtree.openNodeScope(jjtn001);
+   }
+   try {
 /*@egen*/
-    <ASC>/*@bgen(jjtree)*/
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
+   t= <ASC>/*@bgen(jjtree)*/
+   } finally {
+     if (jjtc001) {
+       jjtree.closeNodeScope(jjtn001, true);
+     }
+   }
+/*@egen*/     /*@bgen(jjtree)*/
+                 {
+                   jjtree.closeNodeScope(jjtn000, true);
+                   jjtc000 = false;
+                 }
+/*@egen*/ {jjtn000.value=t.image;}/*@bgen(jjtree)*/
+   } finally {
+     if (jjtc000) {
+       jjtree.closeNodeScope(jjtn000, true);
+     }
+   }
+/*@egen*/
+}
+void DESC()       : {/*@bgen(jjtree) DESC */
+                     ASTDESC jjtn000 = new ASTDESC(JJTDESC);
+                     boolean jjtc000 = true;
+                     jjtree.openNodeScope(jjtn000);
+/*@egen*/Token t;}
+{/*@bgen(jjtree) DESC */
+   try {
+/*@egen*//*@bgen(jjtree) DESC */
+   {
+     ASTDESC jjtn001 = new ASTDESC(JJTDESC);
+     boolean jjtc001 = true;
+     jjtree.openNodeScope(jjtn001);
+   }
+   try {
+/*@egen*/
+   t= <DESC>/*@bgen(jjtree)*/
+   } finally {
+     if (jjtc001) {
+       jjtree.closeNodeScope(jjtn001, true);
+     }
+   }
+/*@egen*/      /*@bgen(jjtree)*/
+                   {
+                     jjtree.closeNodeScope(jjtn000, true);
+                     jjtc000 = false;
+                   }
+/*@egen*/ {jjtn000.value=t.image;}/*@bgen(jjtree)*/
+   } finally {
+     if (jjtc000) {
+       jjtree.closeNodeScope(jjtn000, true);
+     }
+   }
 /*@egen*/
 }
 
