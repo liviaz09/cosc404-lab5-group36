@@ -328,7 +328,7 @@ void Where()            : {/*@bgen(jjtree) #Where(> 0) */
 /*
 TODO: Add OrderBy support here.
 */
-void OrderBy()              : {/*@bgen(jjtree) #OrderBy(> 0) */
+void OrderBy()              :{/*@bgen(jjtree) #OrderBy(> 0) */
   ASTOrderBy jjtn000 = new ASTOrderBy(JJTORDERBY);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
