@@ -120,7 +120,7 @@ void SQLQuery() : { }
 
 void Query() : {}
 {
-	Select() [ From() ] [ Where() ] [ OrderBy() ] /* TODO: Add support for ORDER BY here. */
+	Select() [ From() ] [ Where() ] [ Orderby() ] /* TODO: Add support for ORDER BY here. */
 }
 
 void Select() #Select() : {}
@@ -163,18 +163,18 @@ void Where() #Where(>0) : {}
 /*
 TODO: Add OrderBy support here.
 */
-void OrderBy() #OrderBy(>0) :{}
+void Orderby() #Orderby(>0) :{}
 {
     <ORDERBY> AdditiveExpression() [ASC() | DESC()] ( ","  AdditiveExpression()[ASC() | DESC()])*
 
 }
-void ASC() #ASC : {Token t;}
+void ASC() #ASC : {}
 {
-   t= <ASC> #ASC {jjtThis.value=t.image;}
+    <ASC> 
 }
-void DESC() #DESC : {Token t;}
+void DESC() #DESC : {}
 {
-   t= <DESC> #DESC {jjtThis.value=t.image;}
+  <DESC> 
 }
 
 void AdditiveExpression() #Add(>1) : {}

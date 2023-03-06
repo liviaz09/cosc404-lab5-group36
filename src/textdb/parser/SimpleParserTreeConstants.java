@@ -35,7 +35,7 @@ public interface SimpleParserTreeConstants
     "JoinExpr",
     "On",
     "Where",
-    "OrderBy",
+    "Orderby",
     "ASC",
     "DESC",
     "Add",
@@ -52,4 +52,4 @@ public interface SimpleParserTreeConstants
     "MyID",
   };
 }
-/* JavaCC - OriginalChecksum=b48768d2a487c361f5478114fc145dd2 (do not edit this line) */
+/* JavaCC - OriginalChecksum=1e3dcd40f45668d01b2904482c369483 (do not edit this line) */
