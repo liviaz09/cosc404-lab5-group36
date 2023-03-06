@@ -89,7 +89,7 @@ if (jjtc000) {
     }
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case ORDERBY:{
-      OrderBy();
+      Orderby();
       break;
       }
     default:
@@ -301,8 +301,8 @@ if (jjtc000) {
 /*
 TODO: Add OrderBy support here.
 */
-  final public void OrderBy() throws ParseException {/*@bgen(jjtree) #OrderBy(> 0) */
-  ASTOrderBy jjtn000 = new ASTOrderBy(JJTORDERBY);
+  final public void Orderby() throws ParseException {/*@bgen(jjtree) #Orderby(> 0) */
+  ASTOrderby jjtn000 = new ASTOrderby(JJTORDERBY);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
@@ -390,52 +390,28 @@ if (jjtc000) {
 }
 
   final public void ASC() throws ParseException {/*@bgen(jjtree) ASC */
-                   ASTASC jjtn000 = new ASTASC(JJTASC);
-                   boolean jjtc000 = true;
-                   jjtree.openNodeScope(jjtn000);Token t;
+  ASTASC jjtn000 = new ASTASC(JJTASC);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
     try {
-ASTASC jjtn001 = new ASTASC(JJTASC);
-     boolean jjtc001 = true;
-     jjtree.openNodeScope(jjtn001);
-      try {
-        t = jj_consume_token(ASC);
-      } finally {
-if (jjtc001) {
-       jjtree.closeNodeScope(jjtn001, true);
-     }
-      }
-jjtree.closeNodeScope(jjtn000, true);
-                   jjtc000 = false;
-jjtn000.value=t.image;
+      jj_consume_token(ASC);
     } finally {
 if (jjtc000) {
-       jjtree.closeNodeScope(jjtn000, true);
-     }
+        jjtree.closeNodeScope(jjtn000, true);
+      }
     }
 }
 
   final public void DESC() throws ParseException {/*@bgen(jjtree) DESC */
-                     ASTDESC jjtn000 = new ASTDESC(JJTDESC);
-                     boolean jjtc000 = true;
-                     jjtree.openNodeScope(jjtn000);Token t;
+  ASTDESC jjtn000 = new ASTDESC(JJTDESC);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
     try {
-ASTDESC jjtn001 = new ASTDESC(JJTDESC);
-     boolean jjtc001 = true;
-     jjtree.openNodeScope(jjtn001);
-      try {
-        t = jj_consume_token(DESC);
-      } finally {
-if (jjtc001) {
-       jjtree.closeNodeScope(jjtn001, true);
-     }
-      }
-jjtree.closeNodeScope(jjtn000, true);
-                     jjtc000 = false;
-jjtn000.value=t.image;
+      jj_consume_token(DESC);
     } finally {
 if (jjtc000) {
-       jjtree.closeNodeScope(jjtn000, true);
-     }
+      jjtree.closeNodeScope(jjtn000, true);
+    }
     }
 }
 

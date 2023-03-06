@@ -3,6 +3,8 @@ package textdb.query;
 import java.io.StringReader;
 import java.sql.SQLException;
 
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
+
 import textdb.functions.ConstantValue;
 import textdb.functions.Expression;
 import textdb.functions.ExtractAttribute;
@@ -16,7 +18,7 @@ import textdb.parser.ASTAnd;
 import textdb.parser.ASTCop;
 import textdb.parser.ASTFrom;
 import textdb.parser.ASTInteger;
-import textdb.parser.ASTOrderBy;
+import textdb.parser.ASTOrderby;
 import textdb.parser.ASTSelect;
 import textdb.parser.ASTString;
 import textdb.parser.ASTWhere;
@@ -82,7 +84,7 @@ public class Optimizer
 			else if (child instanceof ASTFrom)
 				fromNode = child;
 			// TODO: Find if ORDER BY node is in parse tree similar to finding other nodes above
-			else if( child instanceof ASTOrderBy)
+			else if( child instanceof ASTOrderby)
 				obNode = child;
 		}
 		
@@ -149,8 +151,6 @@ public class Optimizer
 			Selection selOp = new Selection(current, pred);
 			current = selOp;			
 		}
-
-		
 		// Step #3: Support sorting if ORDER BY node.  Only have to support one integer field e.g. ORDER BY r_regionkey
 		// TODO: Check if have ORDER BY node
 		if (obNode != null)
@@ -160,28 +160,33 @@ public class Optimizer
 			Boolean AorD = false;
 			// stroe the attribute in the attribute variable to check if it is in the relation
 			Attribute att = current.getOutputRelation().findAttributeByName(aName);
-			if(att == null)
+			if(att == null){
 			throw new SQLException(att+" not found in the table");
+			}
 			//now if the attribute exists then as per the question
 			// just get integer type of attribute
 			// TODO: Determine attribute mentioned by ORDER BY clause and verify that it is in schema of current operator
-		
+			System.out.println(aName);
 			String attName = (obNode.jjtGetChild(1).toString());
+			System.out.println(aName);
 			// stroe the attribute in the attribute variable to check if it is in the relation
 			Attribute att1 = current.getOutputRelation().findAttributeByName(attName);
+			System.out.println(aName);
 			System.out.println(att1);
-			if(att1.toString() == "ASC" || att1.toString() == "DESC"){
+			System.out.println(aName);
+			if(att1.toString() != "ASC" || att1.toString() != "DESC"){
 				checkAD = att1.toString();
+				System.out.println(aName);
 			throw new SQLException(att+" not found in the table");
+			} 
+			else if(att1.toString()=="ASC"){
+				AorD=true;
 			}
-			if(checkAD == "ASC")
-				AorD = true;
-		
-		// TODO: Create a sort comparator (see code below)
+			// TODO: Create a sort comparator (see code below)
 		 SortComparator sorter = new SortComparator(new int[]{current.getOutputRelation().getAttributeIndex(att1) }, new boolean[]{AorD});		
 		textdb.operators.MergeSort mergeSortOp = new MergeSort(current, 10000, 100, sorter);
-		 mergeSortOp.setOutputRelation(new Relation(current.getOutputRelation()));
-		}			
+		current = mergeSortOp;
+	}			
 		// Step #4: Create a project node to only output fields required.  Verify that fields are correct at this time as well.  Throw an SQLException if field is not valid (in schema or in tables).
 		int numAttr = pjNode.jjtGetNumChildren();
 		Attribute []attr = new Attribute[numAttr];
