@@ -173,6 +173,7 @@ public class QueryTree {
 		
 
         /* TODO: Create query plan. */
+
         /* TODO: Scan operator */
         TextFileScan supscan = new TextFileScan(DATA_DIR+"supplier.txt", supplier);
         /* TODO: Selection operator */        
@@ -181,10 +182,22 @@ public class QueryTree {
         Selection supsel = new Selection(supscan,pred);
 
         /* TODO: Sort operator */
+         /* Indexes for join predicate are attribute index in each relation: n_nationkey (0), c_nationkey (3) */
        
-
+        SortComparator sc = new SortComparator(new int[]{4}, new boolean[]{true});
+        MergeSort sorter = new MergeSort(supscan, 1000, 10, sc);
         /* TODO: Projection operator */                
-   
+    /* Projection operator */                
+    Expression[] expr = new Expression[3];
+    expr[0] = new ExtractAttribute(5);  
+    expr[1] = new ExtractAttribute(0);  
+    expr[2] = new ExtractAttribute(1);        
+    Projection proj = new Projection(sorter, expr, sorter.getOutputRelation());
+    
+    Operator op;        
+    op = proj;
+  
+    outputOperator(op);
 
         Operator op = null;        
         

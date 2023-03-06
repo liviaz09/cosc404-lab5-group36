@@ -59,7 +59,7 @@ TOKEN [IGNORE_CASE] :
 | <FROM: "from">
 | <WHERE: "where">
 | <ASC: "asc">
-| <DESC: "desc">
+| <DESC: "desc" >
 /* TODO: Add ORDER BY, ASC, DESC tokens here. */
 | <ORDERBY: "order by" | "orderby">
 | <GROUPBY: "group by" | "groupby">
@@ -173,6 +173,11 @@ Expression syntax
 void OrderExpr() #OrderExpr(): {}
 {
     [LOOKAHEAD(2) <ASC> OrderBy()| <DESC> OrderBy()]
+}
+
+void ASC() #ASC : {}
+{
+    <ASC>
 }
 
 void AdditiveExpression() #Add(>1) : {}

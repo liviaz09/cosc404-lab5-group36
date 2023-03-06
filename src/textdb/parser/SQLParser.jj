@@ -63,7 +63,7 @@ TOKEN [IGNORE_CASE] :
 | <FROM: "from">
 | <WHERE: "where">
 | <ASC: "asc">
-| <DESC: "desc">
+| <DESC: "desc" >
 /* TODO: Add ORDER BY, ASC, DESC tokens here. */
 | <ORDERBY: "order by" | "orderby">
 | <GROUPBY: "group by" | "groupby">
@@ -384,6 +384,23 @@ void OrderExpr()             : {/*@bgen(jjtree) #OrderExpr(true) */
         throw (ParseException)jjte000;
       }
       throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void ASC()      : {/*@bgen(jjtree) ASC */
+  ASTASC jjtn000 = new ASTASC(JJTASC);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) ASC */
+    try {
+/*@egen*/
+    <ASC>/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);

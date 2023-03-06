@@ -7,6 +7,7 @@ import textdb.functions.ConstantValue;
 import textdb.functions.Expression;
 import textdb.functions.ExtractAttribute;
 import textdb.operators.BlockNestedLoopJoin;
+import textdb.operators.MergeSort;
 import textdb.operators.Operator;
 import textdb.operators.Projection;
 import textdb.operators.Selection;
@@ -15,6 +16,7 @@ import textdb.parser.ASTAnd;
 import textdb.parser.ASTCop;
 import textdb.parser.ASTFrom;
 import textdb.parser.ASTInteger;
+import textdb.parser.ASTOrderBy;
 import textdb.parser.ASTSelect;
 import textdb.parser.ASTString;
 import textdb.parser.ASTWhere;
@@ -32,6 +34,7 @@ import textdb.predicates.NotEqual;
 import textdb.predicates.Predicate;
 import textdb.predicates.SelectionExprPredicate;
 import textdb.predicates.SelectionPredicate;
+import textdb.predicates.SortComparator;
 import textdb.relation.Attribute;
 import textdb.relation.Relation;
 import textdb.relation.Schema;
@@ -79,6 +82,8 @@ public class Optimizer
 			else if (child instanceof ASTFrom)
 				fromNode = child;
 			// TODO: Find if ORDER BY node is in parse tree similar to finding other nodes above
+			else if( child instanceof ASTOrderBy)
+				obNode = child;
 		}
 		
 		// Step #1: Validate each table in FROM clause.  Throw exception if field is not in schema.  Create scan for each table.  Create joins if more than one table.	
@@ -148,13 +153,35 @@ public class Optimizer
 		
 		// Step #3: Support sorting if ORDER BY node.  Only have to support one integer field e.g. ORDER BY r_regionkey
 		// TODO: Check if have ORDER BY node
-		// TODO: Determine attribute mentioned by ORDER BY clause and verify that it is in schema of current operator
+		if (obNode != null)
+		{
+			String aName = (obNode.jjtGetChild(0).toString());
+			String checkAD =null;
+			Boolean AorD = false;
+			// stroe the attribute in the attribute variable to check if it is in the relation
+			Attribute att = current.getOutputRelation().findAttributeByName(aName);
+			if(att == null)
+			throw new SQLException(att+" not found in the table");
+			//now if the attribute exists then as per the question
+			// just get integer type of attribute
+			// TODO: Determine attribute mentioned by ORDER BY clause and verify that it is in schema of current operator
+		
+			String attName = (obNode.jjtGetChild(1).toString());
+			// stroe the attribute in the attribute variable to check if it is in the relation
+			Attribute att1 = current.getOutputRelation().findAttributeByName(attName);
+			System.out.println(att1);
+			if(att1.toString() == "ASC" || att1.toString() == "DESC"){
+				checkAD = att1.toString();
+			throw new SQLException(att+" not found in the table");
+			}
+			if(checkAD == "ASC")
+				AorD = true;
 		
 		// TODO: Create a sort comparator (see code below)
-		// SortComparator sorter = new SortComparator(new int[]{fieldIndex}, new boolean[]{sortAsc});		
-		// textdb.operators.MergeSort mergeSortOp = new MergeSort(current, 10000, 100, sorter);
-		// mergeSortOp.setOutputRelation(new Relation(inputRelation));
-						
+		 SortComparator sorter = new SortComparator(new int[]{current.getOutputRelation().getAttributeIndex(att1) }, new boolean[]{AorD});		
+		textdb.operators.MergeSort mergeSortOp = new MergeSort(current, 10000, 100, sorter);
+		 mergeSortOp.setOutputRelation(new Relation(current.getOutputRelation()));
+		}			
 		// Step #4: Create a project node to only output fields required.  Verify that fields are correct at this time as well.  Throw an SQLException if field is not valid (in schema or in tables).
 		int numAttr = pjNode.jjtGetNumChildren();
 		Attribute []attr = new Attribute[numAttr];
